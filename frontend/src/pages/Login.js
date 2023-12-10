@@ -1,10 +1,9 @@
 import React from 'react'
 import Layout from '../components/layout/Layout'
-import axios from 'axios'
 
 const Login = () => {
 
-    const handleGoogleClick = ()=>{
+    const handleGoogleClick = async()=>{
         //Opens the google auth from backend
         window.open('http://localhost:4000/auth/google','_self')
     }

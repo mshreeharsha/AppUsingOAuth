@@ -2,15 +2,9 @@ const passport=require('passport')
 const GoogleStatergy = require('passport-google-oauth20')
 const keys=require('./keys')
 const User=require('../models/userModel')
-const jwt=require('jsonwebtoken')
-
-//Function to generate jwt
-const createToken=(_id)=>{
-    return jwt.sign({_id},keys.token.secretKey,{expiresIn: '1d'});
-}
 
 passport.serializeUser((user,done)=>{
-    done(null,user.user._id)
+    done(null,user._id)
 })
 
 passport.deserializeUser((id,done)=>{
@@ -31,8 +25,7 @@ passport.use(new GoogleStatergy({
         User.findOne({googleID:profile.id}).then((user)=>{
             if(user){
                 //User already Exist
-                const token=createToken(user._id)
-                done(null,{user,token})
+                done(null,user)
             }
             else{
                 new User({
@@ -41,8 +34,7 @@ passport.use(new GoogleStatergy({
                 }).save()
                 .then((newUser)=>{
                     console.log(`New User Created : ${newUser}`)
-                    const token=createToken(newUser._id)
-                    done(null,{newUser,token})
+                    done(null,newUser,token)
                 })
             }
         })

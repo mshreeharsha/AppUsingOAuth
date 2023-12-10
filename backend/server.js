@@ -3,15 +3,28 @@ const app=express()
 const keys=require('./config/keys')
 const authRoutes = require('./routes/authRoutes')
 const cors=require('cors')
+const cookieSession=require('cookie-session')
 
 //DataBase Setup
 const databaseSetup=require('./config/databaseSetup')
 
-//Passport Setup
-const passportSetup=require('./config/passportSetup')
-
 //cors
 app.use(cors())
+
+//Passport Setup
+const passportSetup=require('./config/passportSetup')
+const passport = require('passport')
+
+//CookieSession
+
+app.use(cookieSession({
+    maxAge:24*60*60*1000, //1 day
+    keys:[keys.cookieSession.secretKey]
+}))
+
+//Initializing passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 //Routes
 app.use('/auth',authRoutes)
