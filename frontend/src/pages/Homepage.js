@@ -32,11 +32,20 @@ const Homepage = () => {
   },[])
 
   return (
-    <div>
       <Layout>
-        
+        <div className='container' style={{'margin':'auto','width':'70%','textAlign':'left'}}>
+          <h1 style={{'textAlign':'center'}}>Blog Page</h1>
+          <div style={{'color':'#FF4B91'}}>
+            <p>This Blog App is project depicting the Usage of Google's OAuth.OAuth 2.0, an evolution of the original OAuth protocol, is a widely adopted standard for secure and delegated access to resources on the internet. It provides a framework for third-party applications to access user data from resource servers without requiring the disclosure of sensitive credentials, such as usernames and passwords. </p>
+            <p>
+            Along with Normal way of login and register, the extra option is login using Google. This is single sign off mechanism as the user need not to remember many passwords, but still can be verified and authenticated for the website.
+            </p>
+            <p>
+              In This website, people can read blogs and only logged in People can upload they own blogs/articles.
+            </p>
+          </div>
+        </div>
       </Layout>
-    </div>
   )
 }
 
