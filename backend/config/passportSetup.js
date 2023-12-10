@@ -34,7 +34,7 @@ passport.use(new GoogleStatergy({
                 }).save()
                 .then((newUser)=>{
                     console.log(`New User Created : ${newUser}`)
-                    done(null,newUser,token)
+                    done(null,newUser)
                 })
             }
         })

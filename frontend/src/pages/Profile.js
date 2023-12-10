@@ -1,25 +1,20 @@
-import React, { useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import Layout from '../components/layout/Layout'
+import { useAuthContext } from '../context/authContext'
 const Profile = () => {
 
-    const fetchUser=async()=>{
-        try{
-            const response=await axios.get('/auth/login/success')
-
-        }
-        catch(error){
-            console.log(error)
-        }
-    }
-
-    useEffect(()=>{
-        fetchUser()
-    },[])
+    const [auth]=useAuthContext()
 
   return (
     <Layout>
-        <h1>Profile</h1>
+        <div>
+            <h1>Profile Page</h1>
+            {!auth.user?<div>
+                <p>Please Login In to View Your Profile!!</p>
+            </div>:<div>
+                
+            </div>}
+        </div>
     </Layout>
   )
 }
