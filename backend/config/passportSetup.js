@@ -30,7 +30,8 @@ passport.use(new GoogleStatergy({
             else{
                 new User({
                     username:profile.displayName,
-                    googleID:profile.id
+                    googleID:profile.id,
+                    email:profile._json.email
                 }).save()
                 .then((newUser)=>{
                     console.log(`New User Created : ${newUser}`)

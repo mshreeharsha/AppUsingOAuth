@@ -11,9 +11,11 @@ const Homepage = () => {
         if(response.data.success){
           setAuth({
             ...auth,
-            user:response.data.user._id,
-            cookie:response.data.cookie
+            user:response.data.user.user,
+            cookie:response.data.user.cookie
           })
+          console.log('h1'+response.data.cookie)
+          localStorage.setItem("auth", JSON.stringify(response.data.user));
         }
         else{
           console.log(response.data.message)

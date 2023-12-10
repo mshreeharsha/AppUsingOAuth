@@ -11,8 +11,10 @@ router.get('/google/login-success',(req,res)=>{
         res.status(200).send({
             success:true,
             message:'User SuccessFully Logged in',
-            user:req.user,
-            cookie:req.cookies
+            user:{
+                user:req.user,
+                cookie:req.cookies
+            }
         })
     }
     else{

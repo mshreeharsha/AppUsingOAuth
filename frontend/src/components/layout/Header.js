@@ -11,7 +11,8 @@ const Header = () => {
             user:null,
             cookie:''
         })
-        const response = await axios.get('/auth/logout')
+        localStorage.removeItem('auth')
+        await axios.get('/auth/logout')
     }
   return (
     <>
@@ -32,7 +33,7 @@ const Header = () => {
                         <NavLink to='/login' className="nav-link" href="#"><button className='btn btn-danger' onClick={handleLogout}>Logout</button></NavLink>
                         </li>:<></>}
                         {auth?.user?<li>
-                        <NavLink to='/profile' className="nav-link" href="#"><button className='btn btn-danger'>Profile</button></NavLink>
+                        <NavLink to='/profile' className="nav-link" href="#"><button className='btn btn-info'>Profile</button></NavLink>
                         </li>:<></>}
                     </ul>                
                 </div>
