@@ -4,6 +4,7 @@ const keys=require('./config/keys')
 const authRoutes = require('./routes/authRoutes')
 const cors=require('cors')
 const cookieSession=require('cookie-session')
+const flash = require('express-flash');
 
 //DataBase Setup
 const databaseSetup=require('./config/databaseSetup')
@@ -26,8 +27,13 @@ app.use(cookieSession({
 app.use(passport.initialize())
 app.use(passport.session())
 
+//flash
+app.use(flash());
+
+app.use(express.json())
 //Routes
 app.use('/auth',authRoutes)
+
 
 app.listen(keys.PORT,()=>{
     console.log(`Server Listining at Port ${keys.PORT}`)

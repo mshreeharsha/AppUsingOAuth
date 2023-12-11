@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-
+    const navigate=useNavigate()
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [errors,setErrors]=useState("")
@@ -21,6 +22,7 @@ const Login = () => {
           setEmail('')
           setPassword('')
           setErrors('')
+          navigate('/')
         }
         else{
           setErrors(response.data.message)
