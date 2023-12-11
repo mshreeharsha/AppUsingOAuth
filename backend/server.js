@@ -4,9 +4,6 @@ const keys=require('./config/keys')
 const authRoutes = require('./routes/authRoutes')
 const cors=require('cors')
 const cookieSession=require('cookie-session')
-const cookieParser=require('cookie-parser')
-
-app.use(cookieParser)
 
 //DataBase Setup
 const databaseSetup=require('./config/databaseSetup')

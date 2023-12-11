@@ -4,8 +4,7 @@ const AuthContext = createContext()
 
 const AuthContextProvider = ({children})=>{
     const [auth,setAuth]=useState({
-        user:null,
-        cookie:''
+        user:null
     })
     useEffect(()=>{
         const data=localStorage.getItem('auth')
@@ -13,9 +12,7 @@ const AuthContextProvider = ({children})=>{
             const parseData=JSON.parse(data)
             setAuth(
                 {
-                    ...auth,
-                    user:parseData.user,
-                    cookie:parseData.cookie,
+                    user:parseData
                 }
             )
         }

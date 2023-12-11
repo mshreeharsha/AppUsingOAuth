@@ -1,18 +1,16 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useAuthContext } from '../../context/authContext'
-import axios from 'axios'
 
 const Header = () => {
     const [auth,setAuth]=useAuthContext()
 
     const handleLogout = async()=>{
         setAuth({
-            user:null,
-            cookie:''
+            user:null
         })
         localStorage.removeItem('auth')
-        await axios.get('/auth/logout')
+        window.open("http://localhost:4000/auth/logout", "_self");
     }
   return (
     <>
@@ -23,18 +21,18 @@ const Header = () => {
                         HomePage
                     </Link>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        {!auth?.user?<><li className="nav-item">
+                        {!auth.user ? <><li className="nav-item">
                             <NavLink to='/register' className="nav-link" href="#"><button className='btn btn-info' style={{'marginRight':'2px','backgroundColor':'#FFF78A'}}>SignUp</button></NavLink>
                         </li>
                         <li className="nav-item">
                         <NavLink to='/login' className="nav-link" href="#"><button className='btn btn-info' style={{'marginRight':'2px','backgroundColor':'#FFF78A'}}>Login</button></NavLink>
                         </li></>:<></>}
-                        {auth?.user?<li>
-                        <NavLink to='/login' className="nav-link" href="#"><button className='btn btn-danger' onClick={handleLogout}>Logout</button></NavLink>
-                        </li>:<></>}
-                        {auth?.user?<li>
+                        {auth.user ? <><li>
+                        <NavLink className="nav-link" href="#"><button className='btn btn-danger' onClick={handleLogout}>Logout</button></NavLink>
+                        </li>
+                        <li>
                         <NavLink to='/profile' className="nav-link" href="#"><button className='btn btn-info'>Profile</button></NavLink>
-                        </li>:<></>}
+                        </li></>:<></>}
                     </ul>                
                 </div>
             </div>
