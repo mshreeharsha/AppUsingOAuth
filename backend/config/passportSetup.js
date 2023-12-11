@@ -47,30 +47,30 @@ passport.use(new GoogleStrategy({
 passport.use(new LocalStrategy({usernameField:'email',passwordField:'password'},(email,password,done)=>{
     console.log('Here')
     let error=[]
-    if(!email)error.push('email')
-    if(!password)error.push('password')
+    if(!email){error.push('email')}
+    if(!password){error.push('password')}
 
-    if(error.length>=1)(
-        done(null,false,{message:'Email or Password is Missing!!'})
-    )
+    if(error.length>=1){
+        return done(null,false,{message:'Email or Password is Missing!!'})
+    }
     User.findOne({email:email}).then((existingUser)=>{
         if(existingUser){
             if(!existingUser.password){
-                done(null,false,{message:'Email is not Registered!!'})
+                return done(null,false,{message:'Email is not Registered!!'})
             }
             else{
                 //Comparing the Stored Password with the user entered Password
                 const isMatch = bcrypt.compareSync(password, existingUser.password);
                 if (isMatch) {
-                    done(null, existingUser);
+                    return done(null, existingUser);
                 } else {
-                    done(null, false, { message: 'Password is Incorrect' });
+                    return done(null, false, { message: 'Password is Incorrect' });
                 }
             }
         }
         else{
             console.log('Not registered')
-            done(null,false,{message:'Email is Not Registered!!'})
+            return done(null,false,{message:'Email is Not Registered!!'})
         }
     })
 }))

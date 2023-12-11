@@ -23,12 +23,12 @@ app.use(cookieSession({
     keys:[keys.cookieSession.secretKey]
 }))
 
+app.use(flash());
 //Initializing passport
 app.use(passport.initialize())
 app.use(passport.session())
 
 //flash
-app.use(flash());
 
 app.use(express.json())
 //Routes
