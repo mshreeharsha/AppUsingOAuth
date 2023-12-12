@@ -17,7 +17,7 @@ const Login = () => {
     }
     const handleLogin = async()=>{
       try{
-        const response=await axios.post('http://localhost:4000/auth/login',{
+        const response=await axios.post('/auth/login',{
           email,password
         },{
           headers: {
@@ -27,6 +27,10 @@ const Login = () => {
           setEmail('')
           setPassword('')
           setErrors('')
+          setAuth({
+            user:response.data.user,
+          })
+          localStorage.setItem("auth", JSON.stringify(response.data.user));
           navigate('/')
         }
         else{

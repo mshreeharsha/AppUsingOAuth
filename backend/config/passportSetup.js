@@ -45,32 +45,32 @@ passport.use(new GoogleStrategy({
 ))
 
 passport.use(new LocalStrategy({usernameField:'email',passwordField:'password'},(email,password,done)=>{
-    console.log('Here')
     let error=[]
     if(!email){error.push('email')}
     if(!password){error.push('password')}
 
     if(error.length>=1){
-        return done(null,false,{message:'Email or Password is Missing!!'})
+        done(null,false,{message:'Email or Password is Missing!!'})
     }
     User.findOne({email:email}).then((existingUser)=>{
         if(existingUser){
             if(!existingUser.password){
-                return done(null,false,{message:'Email is not Registered!!'})
+                done(null,false,{message:'Email is not Registered!!'})
             }
             else{
                 //Comparing the Stored Password with the user entered Password
                 const isMatch = bcrypt.compareSync(password, existingUser.password);
                 if (isMatch) {
-                    return done(null, existingUser);
+                    console.log('Everything correct'," ",existingUser)
+                    done(null, existingUser);
                 } else {
-                    return done(null, false, { message: 'Password is Incorrect' });
+                    done(null, false, { message: 'Password is Incorrect' });
                 }
             }
         }
         else{
             console.log('Not registered')
-            return done(null,false,{message:'Email is Not Registered!!'})
+            done(null,false,{message:'Email is Not Registered!!'})
         }
     })
 }))

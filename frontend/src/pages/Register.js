@@ -17,7 +17,7 @@ const Register = () => {
     const handleRegister = async(e)=>{
       try{
         e.preventDefault()
-        const response=await axios.post('http://localhost:4000/auth/register',{
+        const response=await axios.post('/auth/register',{
           username,email,password
         },{
           headers: {
