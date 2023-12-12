@@ -20,7 +20,13 @@ const userSchema = new Schema({
     },
     avatar:{
         type:String
-    }
+    },
+    blogs:[
+        {
+            type:mongoose.ObjectId,
+            ref:'Blog'
+        }
+    ]
 },{timestamps:true})
 
 const User=mongoose.model('user',userSchema)
