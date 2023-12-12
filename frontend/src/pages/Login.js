@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
 
 const Login = () => {
-  const [auth,setAuth]=useAuthContext()
+    const [auth,setAuth]=useAuthContext()
     const navigate=useNavigate()
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
@@ -15,6 +15,12 @@ const Login = () => {
         //Opens the google auth from backend
         window.open('http://localhost:4000/auth/google','_self')
     }
+
+    const handleGithubClick = ()=>{
+        //Opens the github auth from backend
+        window.open('http://localhost:4000/auth/github','_self')
+    }
+
     const handleLogin = async()=>{
       try{
         const response=await axios.post('/auth/login',{
@@ -65,6 +71,9 @@ const Login = () => {
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
             <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Sign in Using Google</button>
+          </div>
+          <div className='row' style={{ 'marginTop': '10px' }}>
+            <button onClick={handleGithubClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Sign in Using Github</button>
           </div>
         </div>
       </div>

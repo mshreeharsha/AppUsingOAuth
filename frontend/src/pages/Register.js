@@ -10,10 +10,19 @@ const Register = () => {
     const [password,setPassword]=useState('')
     const [errors,setErrors]=useState("")
 
+    //Register using Google OAuth
     const handleGoogleClick = ()=>{
         //Opens the google auth from backend
         window.open('http://localhost:4000/auth/google','_self')
     }
+
+    //Register using Github Auth
+    const handleGithubClick = ()=>{
+      //Opens the github auth from backend
+      window.open('http://localhost:4000/auth/github','_self')
+  }
+
+    //Handling Manual Register
     const handleRegister = async(e)=>{
       try{
         // e.preventDefault()
@@ -64,6 +73,9 @@ const Register = () => {
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
             <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Register in Using Google</button>
+          </div>
+          <div className='row' style={{ 'marginTop': '10px' }}>
+            <button onClick={handleGithubClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Sign in Using Github</button>
           </div>
         </div>
         

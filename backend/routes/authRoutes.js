@@ -4,12 +4,7 @@ const router=express.Router()
 const User = require('../models/userModel')
 const bcrypt=require('bcryptjs')
 
-router.get('/google',passport.authenticate('google',{
-    scope:["profile","email"],
-    prompt: 'consent',
-    access_type: 'offline'
-}))
-
+//Route for sending response after being logged in
 router.get('/google/login-success',(req,res)=>{
     if(req.user){
         res.status(200).send({
@@ -26,11 +21,33 @@ router.get('/google/login-success',(req,res)=>{
     }
 })
 
+//Google OAuth Consent Screen Route
+router.get('/google',passport.authenticate('google',{
+    scope:["profile","email"],
+    prompt: 'consent',
+    access_type: 'offline'
+}))
+
+//Github OAuth Consent Screen Route
+router.get('/github',passport.authenticate('github',{
+    scope:["profile","email"],
+    prompt: 'consent',
+    access_type: 'offline'
+}))
+
+//Google OAuth Redirect/Callback Route
 router.get('/google/redirect',passport.authenticate('google',{
     successRedirect:'http://localhost:3000',
     failureRedirect:'http://localhost:3000/login'
 }))
 
+//Github OAuth Redirect/Callback Route
+router.get('/github/redirect',passport.authenticate('github',{
+    successRedirect:'http://localhost:3000',
+    failureRedirect:'http://localhost:3000/login'
+}))
+
+//Manual Register Route
 router.post('/register',async(req,res)=>{
     console.log(req.body)
     const {username, email, password} = req.body
@@ -76,6 +93,7 @@ router.post('/register',async(req,res)=>{
     }
 })
 
+//Manual Login Route
 router.post('/login', passport.authenticate('local', {
     failureRedirect:'http://localhost:4000/auth/login-failure-response',
     failureFlash: true
@@ -89,6 +107,7 @@ router.post('/login', passport.authenticate('local', {
     })
 });
 
+//Response for Login Failure
 router.get('/login-failure-response',(req,res)=>{
     res.send({
         success:false,
@@ -96,16 +115,17 @@ router.get('/login-failure-response',(req,res)=>{
     })
 })
 
+//Displaying the Error causing the Login Failure Route
 router.get('/login-failure', (req, res) => {
     const errorMessage=req.flash('error')[0]
-    // console.log(errorMessage)
+    //Flash messages are typically consumed after a redirect, or first time use
     res.send({
         success:false,
         message:errorMessage
     })
 });
   
-
+//Logout Route
 router.get('/logout',(req,res)=>{
     req.logout()
     res.redirect('http://localhost:3000/login')

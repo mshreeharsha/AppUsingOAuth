@@ -1,5 +1,6 @@
 const passport=require('passport')
 const GoogleStrategy = require('passport-google-oauth20')
+const GithubStrategy = require('passport-github2').Strategy
 const LocalStrategy = require('passport-local').Strategy
 const keys=require('./keys')
 const User=require('../models/userModel')
@@ -33,6 +34,33 @@ passport.use(new GoogleStrategy({
                 new User({
                     username:profile.displayName,
                     googleID:profile.id,
+                    email:profile._json.email
+                }).save()
+                .then((newUser)=>{
+                    console.log(`New User Created : ${newUser}`)
+                    done(null,newUser)
+                })
+            }
+        })
+    }
+))
+
+passport.use(new GithubStrategy({
+        clientID:keys.github.clientID,
+        clientSecret:keys.github.clientSecret,
+        callbackURL:'/auth/github/redirect'
+    },(accessToken,refreshToken,profile,done)=>{
+        console.log(profile)
+
+        User.findOne({githubID:profile.id}).then((user)=>{
+            if(user){
+                //User already Exist
+                done(null,user)
+            }
+            else{
+                new User({
+                    username:profile.username,
+                    githubID:profile.id,
                     email:profile._json.email
                 }).save()
                 .then((newUser)=>{
