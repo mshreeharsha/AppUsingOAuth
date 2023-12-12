@@ -77,11 +77,11 @@ router.post('/register',async(req,res)=>{
 })
 
 router.post('/login', passport.authenticate('local', {
-    failureRedirect: 'http://localhost:4000/auth/login-failure',
+    failureRedirect:'http://localhost:4000/auth/login-failure-response',
     failureFlash: true
 }),(req,res)=>{
-    console.log('req.isAuthenticated():', req.isAuthenticated());
-    console.log('req.user:', req.user);
+    // console.log('req.isAuthenticated():', req.isAuthenticated());
+    // console.log('req.user:', req.user);
     res.send({
         success:true,
         message:'Login Successful!!',
@@ -89,9 +89,16 @@ router.post('/login', passport.authenticate('local', {
     })
 });
 
+router.get('/login-failure-response',(req,res)=>{
+    res.send({
+        success:false,
+        message:'Login Failed!!'
+    })
+})
+
 router.get('/login-failure', (req, res) => {
-    console.log(req.flash('error'))
-    const errorMessage = req.flash('error')[0] || 'Login failed.';
+    const errorMessage=req.flash('error')[0]
+    // console.log(errorMessage)
     res.send({
         success:false,
         message:errorMessage

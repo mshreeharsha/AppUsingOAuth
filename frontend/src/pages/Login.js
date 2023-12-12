@@ -34,7 +34,9 @@ const Login = () => {
           navigate('/')
         }
         else{
-          setErrors(response.data.message)
+          const res=await axios.get('/auth/login-failure')
+          console.log(res.data.message)
+          setErrors(res.data.message)
         }
       }
       catch(error){
@@ -55,7 +57,7 @@ const Login = () => {
           <div className='row' style={{ 'marginTop': '10px' }}>
             <button className='btn btn-warning' onClick={handleLogin}>Login</button>
           </div>
-          {errors.length > 0 ? <div className='row' style={{ 'marginTop': '10px', 'border':'2px red solid','color':'red','fontWeight':'bold'}}>
+          {errors ? <div className='row' style={{ 'marginTop': '10px', 'border':'2px red solid','color':'red','fontWeight':'bold'}}>
             {errors}
           </div>:<></>}
           <div className='container' style={{'justifyContent':'center','marginTop':'10px','marginBottom':'10px','border':'1px grey solid','borderRadius':'50%','width':'30px','height':'30px','paddingRight':'15px','paddingLeft':'3px'}}>

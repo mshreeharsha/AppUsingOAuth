@@ -4,7 +4,8 @@ const keys=require('./config/keys')
 const authRoutes = require('./routes/authRoutes')
 const cors=require('cors')
 const cookieSession=require('cookie-session')
-const flash = require('express-flash');
+const flash = require('connect-flash');
+
 
 //DataBase Setup
 const databaseSetup=require('./config/databaseSetup')

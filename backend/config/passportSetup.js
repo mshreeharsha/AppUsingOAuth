@@ -61,7 +61,7 @@ passport.use(new LocalStrategy({usernameField:'email',passwordField:'password'},
                 //Comparing the Stored Password with the user entered Password
                 const isMatch = bcrypt.compareSync(password, existingUser.password);
                 if (isMatch) {
-                    console.log('Everything correct'," ",existingUser)
+                    // console.log('Everything correct'," ",existingUser)
                     done(null, existingUser);
                 } else {
                     done(null, false, { message: 'Password is Incorrect' });

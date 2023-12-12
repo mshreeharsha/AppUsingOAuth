@@ -16,7 +16,7 @@ const Register = () => {
     }
     const handleRegister = async(e)=>{
       try{
-        e.preventDefault()
+        // e.preventDefault()
         const response=await axios.post('/auth/register',{
           username,email,password
         },{
@@ -42,7 +42,7 @@ const Register = () => {
     <Layout>
       <div className='container' style={{ 'margin': 'auto', 'width': '30%', 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center', 'justifyContent': 'space-between'}}>
         <h2>Don't Have an Account Yet?? Register Now...</h2>
-        <form onSubmit={(e)=>handleRegister(e)}>
+        
         <div className='col-md-6' style={{ 'width': '100%' }}>
           <div className='row' style={{ 'marginTop': '50px' }}>
             <input type='text' className='form-control' value={username} name='username' onChange={(e) => { setUsername(e.target.value) }} placeholder='User Name' required />
@@ -54,7 +54,7 @@ const Register = () => {
             <input type='password' className='form-control' value={password} name='password' onChange={(e) => { setPassword(e.target.value) }} placeholder='Password' required />
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
-            <button className='btn btn-warning' type="submit">Register</button>
+            <button className='btn btn-warning' onClick={handleRegister}>Register</button>
           </div>
           {errors.length > 0 ? <div className='row' style={{ 'marginTop': '10px', 'border':'2px red solid','color':'red','fontWeight':'bold'}}>
             {errors}
@@ -66,7 +66,7 @@ const Register = () => {
             <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Register in Using Google</button>
           </div>
         </div>
-        </form>
+        
       </div>
     </Layout>
 
