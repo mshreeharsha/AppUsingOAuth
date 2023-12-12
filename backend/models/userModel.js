@@ -17,6 +17,9 @@ const userSchema = new Schema({
     },
     email:{
         type:String
+    },
+    avatar:{
+        type:String
     }
 },{timestamps:true})
 

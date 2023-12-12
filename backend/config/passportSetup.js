@@ -34,7 +34,8 @@ passport.use(new GoogleStrategy({
                 new User({
                     username:profile.displayName,
                     googleID:profile.id,
-                    email:profile._json.email
+                    email:profile._json.email,
+                    avatar:profile._json.picture
                 }).save()
                 .then((newUser)=>{
                     console.log(`New User Created : ${newUser}`)
@@ -61,7 +62,8 @@ passport.use(new GithubStrategy({
                 new User({
                     username:profile.username,
                     githubID:profile.id,
-                    email:profile._json.email
+                    email:profile._json.email,
+                    avatar:profile._json.avatar_url
                 }).save()
                 .then((newUser)=>{
                     console.log(`New User Created : ${newUser}`)

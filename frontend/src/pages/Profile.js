@@ -13,8 +13,15 @@ const Profile = () => {
             {!auth.user?<div>
                 <p>Please Login In to View Your Profile!!</p>
             </div>:<div>
-                <p>{auth.user?.username}</p>
-                <p>{auth.user?.email}</p>
+                <div>
+                    <img src={auth.user.avatar} alt={auth.user?.username} style={{'height':'150px','width':'150px','marginBottom':'30px','marginTop':'30px'}} />
+                </div>
+                <div>
+                    <p style={{'fontSize':'32px','fontWeight':'bold','color':'#FF5B22'}}>{auth.user?.username}</p>
+                </div>
+                <div>
+                    <p style={{'fontSize':'24px','color':'#FF4B91'}}>{auth.user?.email}</p>
+                </div>
             </div>}
         </div>
     </Layout>
