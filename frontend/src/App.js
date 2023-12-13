@@ -16,11 +16,11 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/my-blogs' element={<MyBlog/>}/>
+        <Route path='all' element={<AllBlogs/>}/>
+        <Route path='blog/:bid' element={<BlogDetails/>}/>
         <Route path='/blogs'>
-          <Route path='all' element={<AllBlogs/>}/>
+          <Route path='my-blogs' element={<MyBlog/>}/>
           <Route path='create' element={<NewBlog/>}/>
-          <Route path='blog/:bid' element={<BlogDetails/>} />
         </Route>
       </Routes>
     </div>

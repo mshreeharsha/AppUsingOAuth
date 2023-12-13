@@ -6,10 +6,6 @@ const blogSchema = new Schema({
         type:String,
         required:true
     },
-    slug:{
-        type:String,
-        required:true
-    },
     author:{
         type:mongoose.ObjectId,
         ref:'User'

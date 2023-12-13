@@ -42,7 +42,7 @@ const Header = () => {
                     <Link to='/' className="navbar-brand" href="#">
                         HomePage
                     </Link>
-                    <Link to='/blogs' className="navbar-brand" href="#">
+                    <Link to='/all' className="navbar-brand" href="#">
                         All Blogs
                     </Link>
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -64,7 +64,7 @@ const Header = () => {
                             <ul className="dropdown-menu">
                                 <li><NavLink to='/profile' className="dropdown-item"><button className='btn btn-info'>Profile</button></NavLink></li>
 
-                                <li><NavLink to='/my-blogs' className="dropdown-item" href="#"><button className='btn btn-info'>My Blogs</button></NavLink></li>
+                                <li><NavLink to='/blogs/my-blogs' className="dropdown-item" href="#"><button className='btn btn-info'>My Blogs</button></NavLink></li>
 
                             </ul>
                         </li><li>
