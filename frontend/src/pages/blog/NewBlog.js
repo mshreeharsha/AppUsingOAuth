@@ -9,6 +9,7 @@ const NewBlog = () => {
     const [photo,setPhoto]=useState('')
     const [intro,setIntro]=useState('')
     const [main,setMain]=useState('')
+    const [error,setError]=useState('')
     const [conclusion,setConclusion]=useState('')
 
     const handleSubmit = async()=>{
@@ -35,7 +36,7 @@ const NewBlog = () => {
                 navigate('/blogs/my-blogs')
             }
             else{
-                console.log(response.data.message)
+                setError(response.data.message)
             }
         }
         catch(error){
@@ -80,6 +81,9 @@ const NewBlog = () => {
                             setConclusion(e.target.value)
                         }} rows={4}></textarea>
                 </div>
+                {error.length > 0 && <div className='row' style={{ 'marginTop': '10px','fontWeight':'bold', 'color':'red','border':'2px solid red'}}>
+                    {error}
+                </div>}
                 <div className='row' style={{ 'marginTop': '10px','marginBottom':'60px' }}>
                     <button className='btn btn-warning' onClick={handleSubmit}>Create</button>
                 </div>

@@ -10,9 +10,9 @@ const blogSchema = new Schema({
         type:mongoose.ObjectId,
         ref:'User'
     },
-    image:{
-        type:'String',
-        required:true
+    photo:{
+        data:Buffer,
+        contentType:String
     },
     contentIntro:{
         type:String,
