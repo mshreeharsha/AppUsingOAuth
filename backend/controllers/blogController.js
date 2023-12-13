@@ -3,7 +3,6 @@ const fs = require('fs');
 const Blog = require('../models/blogModel');
 const User = require('../models/userModel')
 
-
 const createBlogController = async(req,res)=>{
     try{
         const {title,contentIntro,contentMain,contentConclusion}  = req.fields
@@ -52,24 +51,73 @@ const createBlogController = async(req,res)=>{
         })
     }
     catch(error){
-        console.log(error)
-        res.status(500).send({
+        res.status(400).send({
             success:false,
             message:error.message
         })
     }
 }
 
-const getAllBlogsController =async(req,res)=>{
+const updateBlogController = async(req,res)=>{
 
+}
+
+const getAllBlogsController =async(req,res)=>{
+    try{
+        const allBlogs=await Blog.find({}).sort({createdAt:-1}).select("-photo -contentInto -contentMain -contentConclusion")
+        res.status(200).send({
+            success:true,
+            message:'Fectched all Blogs',
+            allBlogs
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            success:false,
+            message:'Fetching all Blogs Failed!!',
+            error
+        })
+    }
 }
 
 const getSingleBlog = async(req,res)=>{
-
+    try{
+        const blog = await Blog.findOne({_id:req.params.bid}).select("-photo")
+        res.status(200).send({
+            success:true,
+            message:'Successfully Fteched One Blog',
+            blog
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            success:false,
+            message:'Error in Fetching Single Blog',
+            error
+        })
+    }
 }
 
 const getAllUserBlog = async(req,res)=>{
+    try{
+        const allBlogs=await Blog.find({ _id: { $in: req.user.blogs }}).sort({createdAt:-1}).select("-photo -contentInto -contentMain -contentConclusion")
+        res.status(200).send({
+            success:true,
+            message:'Fetched All User',
+            allBlogs
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            success:'false',
+            message:"Error in Fetching User's all Blogs",
+            error
+        })
+    }
+}
+
+const getPhotoController = async(req,res)=>{
 
 }
 
-module.exports = {createBlogController,getAllBlogsController,getSingleBlog,getAllUserBlog}
+module.exports = {createBlogController,getAllBlogsController,getSingleBlog,getAllUserBlog,updateBlogController,getPhotoController}
