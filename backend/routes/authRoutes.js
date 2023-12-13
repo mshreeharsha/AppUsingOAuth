@@ -3,6 +3,7 @@ const passport = require('passport')
 const router=express.Router()
 const User = require('../models/userModel')
 const bcrypt=require('bcryptjs')
+const { requireSignIn } = require('../middleware/authMiddleware')
 
 //Route for sending response after being logged in
 router.get('/google/login-success',(req,res)=>{
@@ -10,7 +11,7 @@ router.get('/google/login-success',(req,res)=>{
         res.status(200).send({
             success:true,
             message:'User SuccessFully Logged in',
-            user:req.user
+            user:req.user._id
         })
     }
     else{
@@ -103,7 +104,7 @@ router.post('/login', passport.authenticate('local', {
     res.send({
         success:true,
         message:'Login Successful!!',
-        user:req.user
+        user:req.user._id
     })
 });
 
@@ -129,6 +130,14 @@ router.get('/login-failure', (req, res) => {
 router.get('/logout',(req,res)=>{
     req.logout()
     res.redirect('http://localhost:3000/login')
+})
+
+router.get('/getUser',requireSignIn,(req,res)=>{
+    res.status(200).send({
+        success:true,
+        message:'User Fetched Successfully!!',
+        user:req.user
+    })
 })
 
 module.exports=router

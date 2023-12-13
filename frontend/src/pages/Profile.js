@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout/Layout'
 import { useAuthContext } from '../context/authContext'
+import axios from 'axios'
 const Profile = () => {
 
+    const [user,setUser]=useState({})
     const [auth]=useAuthContext()
-    console.log(auth)
+    // console.log(auth)
+
+    const fetchUser= async()=>{
+        try{
+            const response = await axios.get('/auth/getUser')
+            if(response.data.success){
+                setUser(response.data.user)
+            }
+            else{
+                console.log(response.data.message)
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+
+    useEffect(()=>{
+        fetchUser()
+    },[])
 
   return (
     <Layout>
@@ -13,14 +34,14 @@ const Profile = () => {
             {!auth.user?<div>
                 <p>Please Login In to View Your Profile!!</p>
             </div>:<div>
+                {user.avatar?<div>
+                    <img src={user.avatar} alt={user.username} style={{'height':'150px','width':'150px','marginBottom':'30px','marginTop':'30px'}} />
+                </div>:<></>}
                 <div>
-                    <img src={auth.user.avatar} alt={auth.user?.username} style={{'height':'150px','width':'150px','marginBottom':'30px','marginTop':'30px'}} />
+                    <p style={{'fontSize':'32px','fontWeight':'bold','color':'#FF5B22'}}>{user?.username}</p>
                 </div>
                 <div>
-                    <p style={{'fontSize':'32px','fontWeight':'bold','color':'#FF5B22'}}>{auth.user?.username}</p>
-                </div>
-                <div>
-                    <p style={{'fontSize':'24px','color':'#FF4B91'}}>{auth.user?.email}</p>
+                    <p style={{'fontSize':'24px','color':'#FF4B91'}}>{user?.email}</p>
                 </div>
             </div>}
         </div>
