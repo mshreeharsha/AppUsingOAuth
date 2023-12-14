@@ -192,4 +192,32 @@ const getPhotoController = async(req,res)=>{
     }
 }
 
-module.exports = {createBlogController,getAllBlogsController,getSingleBlog,getAllUserBlog,updateBlogController,getPhotoController}
+const deleteBlogController = async(req,res)=>{
+    try{
+        const existingBlog=await Blog.findById(req.params.bid).select("author")
+        if(existingBlog.author!=req.user._id){
+            return res.status(403).send({
+                success:false,
+                message:"User cant delete Someone else's Blog"
+            })
+        }
+
+        await User.findOneAndUpdate({_id:req.user._id},
+            {$pull : {blogs: req.params.bid}},{new:true})
+        
+        await Blog.findOneAndDelete({_id:req.params.bid}).select("-photo")
+        res.status(200).send({
+            success:true,
+            message:'Blog Deleted Successfully!!'
+        })
+    }
+    catch(error){
+        res.status(400).send({
+            success:false,
+            message:'Error in Deleteing the Blog',
+            error
+        })
+    }
+}
+
+module.exports = {createBlogController,getAllBlogsController,getSingleBlog,getAllUserBlog,updateBlogController,getPhotoController,deleteBlogController}
