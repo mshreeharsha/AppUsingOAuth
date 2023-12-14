@@ -59,12 +59,71 @@ const createBlogController = async(req,res)=>{
 }
 
 const updateBlogController = async(req,res)=>{
+    try{
 
+        const existingBlog = await Blog.findById(req.params.bid).select("author")
+        if(existingBlog.author!=req.user._id){
+            return res.status(403).send({
+                success:false,
+                message:"User is not Authorized to Edit Someone else's Blog!!"
+            })
+        }
+
+        const {title,contentIntro,contentMain,contentConclusion} = req.fields
+        const {photo}=req.files
+
+        let error=[]
+        if(!title){
+            error.push('title')
+        }
+        if(!contentIntro){
+            error.push('intro')
+        }
+        if(!contentMain){
+            error.push('main')
+        }
+        if(!contentConclusion){
+            error.push('conclusion')
+        }
+
+        if(error.length>0){
+            return res.send({
+                success:false,
+                message:'All Fields have to be Filled'
+            })
+        }
+
+        const updatedBlog = await Blog.findOneAndUpdate({_id:req.params.bid},{
+            ...req.fields,
+            author:req.user._id
+        },{new : true})
+
+        if(photo){
+            updatedBlog.photo.data = fs.readFileSync(photo.path)
+
+            updatedBlog.photo.contentType=photo.type
+        }
+        
+        await updatedBlog.save()
+
+        res.status(200).send({
+            success:true,
+            message:'Blog Updated Successfully'
+        })
+
+    }
+    catch(error){
+        res.status(400).send({
+            success:false,
+            message:'Error in Updating the Blog',
+            error
+        })
+    }
 }
 
 const getAllBlogsController =async(req,res)=>{
     try{
-        const allBlogs=await Blog.find({}).sort({createdAt:-1}).select("-photo -contentInto -contentMain -contentConclusion")
+        const allBlogs=await Blog.find({}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion")
         res.status(200).send({
             success:true,
             message:'Fectched all Blogs',
@@ -100,7 +159,7 @@ const getSingleBlog = async(req,res)=>{
 
 const getAllUserBlog = async(req,res)=>{
     try{
-        const allBlogs=await Blog.find({ _id: { $in: req.user.blogs }}).sort({createdAt:-1}).select("-photo -contentInto -contentMain -contentConclusion")
+        const allBlogs=await Blog.find({ _id: { $in: req.user.blogs }}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion")
         res.status(200).send({
             success:true,
             message:'Fetched All User',
@@ -117,7 +176,20 @@ const getAllUserBlog = async(req,res)=>{
 }
 
 const getPhotoController = async(req,res)=>{
-
+    try{
+        const exisitingBlog= await Blog.findOne({_id:req.params.bid}).select("photo")
+        if(exisitingBlog.photo.data){
+            res.set('Content-type',exisitingBlog.photo.contentType);
+            return res.status(200).send(exisitingBlog.photo.data);
+        }
+    }
+    catch(error){
+        res.status(400).send({
+            success:false,
+            message:'Error in Fetching the Photo',
+            error
+        })
+    }
 }
 
 module.exports = {createBlogController,getAllBlogsController,getSingleBlog,getAllUserBlog,updateBlogController,getPhotoController}
