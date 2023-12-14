@@ -123,7 +123,8 @@ const updateBlogController = async(req,res)=>{
 
 const getAllBlogsController =async(req,res)=>{
     try{
-        const allBlogs=await Blog.find({}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion")
+        const allBlogs=await Blog.find({}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion").populate('author')
+        console.log(allBlogs)
         res.status(200).send({
             success:true,
             message:'Fectched all Blogs',
@@ -131,6 +132,7 @@ const getAllBlogsController =async(req,res)=>{
         })
     }
     catch(error){
+        console.log(error.message)
         res.status(400).send({
             success:false,
             message:'Fetching all Blogs Failed!!',
@@ -141,7 +143,7 @@ const getAllBlogsController =async(req,res)=>{
 
 const getSingleBlog = async(req,res)=>{
     try{
-        const blog = await Blog.findOne({_id:req.params.bid}).select("-photo")
+        const blog = await Blog.findOne({_id:req.params.bid}).select("-photo").populate('author')
         res.status(200).send({
             success:true,
             message:'Successfully Fteched One Blog',
@@ -159,7 +161,7 @@ const getSingleBlog = async(req,res)=>{
 
 const getAllUserBlog = async(req,res)=>{
     try{
-        const allBlogs=await Blog.find({ _id: { $in: req.user.blogs }}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion")
+        const allBlogs=await Blog.find({ _id: { $in: req.user.blogs }}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion").populate('author')
         res.status(200).send({
             success:true,
             message:'Fetched All User',
