@@ -198,7 +198,7 @@ const getPhotoController = async(req,res)=>{
 const deleteBlogController = async(req,res)=>{
     try{
         const existingBlog=await Blog.findById(req.params.bid).select("author")
-        if(existingBlog.author!=req.user._id){
+        if(!existingBlog.author._id.equals(req.user._id)){
             return res.status(403).send({
                 success:false,
                 message:"User cant delete Someone else's Blog"

@@ -10,6 +10,6 @@ router.get('/get-all-blogs',getAllBlogsController)
 router.get('/get-photo/:bid',getPhotoController)
 router.get('/get-blog/:bid',getSingleBlog)
 router.get('/get-all-user-blog',requireSignIn,getAllUserBlog)
-router.delete('delete-blog/:bid',deleteBlogController)
+router.delete('/delete-blog/:bid',deleteBlogController)
 
 module.exports=router

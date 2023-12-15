@@ -33,7 +33,7 @@ const MyBlog = () => {
   return (
     <Layout>
       <h1 style={{'color':'#49108B','textAlign':'center'}}>"Creativity is intelligence having fun."<br/> - Albert Einstein</h1>
-      <h2 style={{'marginTop':'50px','textAlign':'center'}}>My Creative Works</h2>
+      <h2 style={{'marginTop':'50px','textAlign':'center'}}>My Creative Works - My Blogs</h2>
 
       <div className='container' style={{ 'margin': 'auto', 'width': '80%', 'display': 'flex', 'flexDirection': 'row', 'alignItems': 'center', 'justifyContent': 'center'}}>
         {blogs.map((blog)=>(
