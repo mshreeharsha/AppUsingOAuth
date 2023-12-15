@@ -3,6 +3,10 @@ import Layout from '../components/layout/Layout'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../context/authContext'
+import {toast} from 'react-hot-toast';
+
+import Google from '../images/google.png'
+import Github from '../images/github.png'
 
 const Login = () => {
     const [auth,setAuth]=useAuthContext()
@@ -37,11 +41,11 @@ const Login = () => {
             user:response.data.user,
           })
           localStorage.setItem("auth", JSON.stringify(response.data.user));
+          toast.success(response.data.message)
           navigate('/')
         }
         else{
           const res=await axios.get('/auth/login-failure')
-          console.log(res.data.message)
           setErrors(res.data.message)
         }
       }
@@ -70,10 +74,10 @@ const Login = () => {
             OR
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
-            <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Sign in Using Google</button>
+            <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}><img src={Google} alt='google' style={{'width':'30px', 'height':'30px'}}/> Google</button>
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
-            <button onClick={handleGithubClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Sign in Using Github</button>
+            <button onClick={handleGithubClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}><img src={Github} alt='github' style={{'width':'30px', 'height':'30px'}}/>  Github</button>
           </div>
         </div>
       </div>

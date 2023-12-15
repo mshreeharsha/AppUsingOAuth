@@ -8,10 +8,12 @@ import NewBlog from "./pages/blog/NewBlog";
 import AllBlogs from "./pages/blog/AllBlogs";
 import MyBlog from "./pages/blog/MyBlog";
 import UpdateBlog from "./pages/blog/UpdateBlog";
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div>
+      <Toaster/>
       <Routes>
         <Route path='/' element={<Homepage/>}/>
         <Route path='/login' element={<Login/>}/>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../../components/layout/Layout'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-hot-toast';
 
 const NewBlog = () => {
     const navigate = useNavigate()
@@ -33,6 +34,7 @@ const NewBlog = () => {
                 setMain("")
                 setConclusion("")
                 setPhoto("")
+                toast.success(response.data.message)
                 navigate('/blogs/my-blogs')
             }
             else{

@@ -3,6 +3,7 @@ import Layout from '../../components/layout/Layout'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Card from './Card'
+import {toast} from 'react-hot-toast';
 
 const AllBlogs = () => {
 
@@ -17,7 +18,7 @@ const AllBlogs = () => {
         console.log(blogs)
       }
       else{
-        console.log(response.data.message)
+        toast.error(response.data.message)
       }
     }
     catch(error){

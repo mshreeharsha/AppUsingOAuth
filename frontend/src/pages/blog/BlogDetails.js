@@ -5,6 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthContext } from '../../context/authContext'
 import {} from 'antd'
 import Modal from 'antd/es/modal/Modal';
+import {toast} from 'react-hot-toast';
+
+import Edit from '../../images/edit.png'
+import Delete from '../../images/delete.png'
 
 const BlogDetails = () => {
 
@@ -23,7 +27,7 @@ const BlogDetails = () => {
         setBlog(response.data.blog)
       }
       else{
-        console.log(response.data.message)
+        toast.error(response.data.message)
       }
     }
     catch(error){
@@ -32,7 +36,6 @@ const BlogDetails = () => {
   }
 
   useEffect(()=>{
-    console.log('Hi')
     fetchBlog()
     // eslint-disable-next-line
   },[params.bid])
@@ -52,10 +55,11 @@ const BlogDetails = () => {
         const response = await axios.delete(`/blog/delete-blog/${blog._id}`)
         if(response.data.success){
           setVisible(false)
+          toast.success(response.data.message)
           navigate('/blogs/my-blogs')
         }
         else{
-          console.log(response.data.message)
+          toast.error(response.data.message)
         }
       }
     }
@@ -71,8 +75,8 @@ const BlogDetails = () => {
           <div style={{ fontSize: '18px', textAlign: 'center' }}>
             <h5>Author: <b>{blog.author.username}</b></h5>
             <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
-                {( blog && blog.author._id===auth.user) ?<><button className='btn btn-info' style={{ marginRight: '10px' }} onClick={handleUpdate}>Edit</button>
-                <button className='btn btn-danger' onClick={()=>setVisible(true)}>Delete</button></>:<></>}
+                {( blog && blog.author._id===auth.user) ?<><button className='btn btn-info' style={{ marginRight: '10px' }} onClick={handleUpdate}><img src={Edit} style={{'width':'30px','height':'30px'}} alt='edit'/></button>
+                <button className='btn btn-danger' onClick={()=>setVisible(true)}><img src={Delete} style={{'width':'30px','height':'30px'}} alt='delete' /></button></>:<></>}
             </div>
           </div>
         </div>}

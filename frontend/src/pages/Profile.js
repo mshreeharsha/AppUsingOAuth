@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../components/layout/Layout'
 import { useAuthContext } from '../context/authContext'
 import axios from 'axios'
+import {toast} from 'react-hot-toast';
 const Profile = () => {
 
     const [user,setUser]=useState({})
@@ -15,7 +16,7 @@ const Profile = () => {
                 setUser(response.data.user)
             }
             else{
-                console.log(response.data.message)
+                toast.error(response.data.message)
             }
         }
         catch(error){

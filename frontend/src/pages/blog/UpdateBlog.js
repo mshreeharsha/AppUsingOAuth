@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Layout from '../../components/layout/Layout'
 import { useAuthContext } from '../../context/authContext'
+import {toast} from 'react-hot-toast';
 
 const UpdateBlog = () => {
 
@@ -33,7 +34,7 @@ const UpdateBlog = () => {
                 setConclusion(response.data.blog.contentConclusion.replace(/\|/g, '\n'))
             }
             else{
-                console.log(response.data.message)
+                toast.error(response.data.message)
             }
         }
         catch(error){
@@ -67,6 +68,7 @@ const UpdateBlog = () => {
                 setConclusion("")
                 setPhoto("")
                 setId("")
+                toast.success(response.data.message)
                 navigate('/blogs/my-blogs')
             }
             else{

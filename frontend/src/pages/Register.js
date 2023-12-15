@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-hot-toast';
+
+import Google from '../images/google.png'
+import Github from '../images/github.png'
 
 const Register = () => {
   const navigate=useNavigate()
@@ -37,6 +41,7 @@ const Register = () => {
           setUsername('')
           setPassword('')
           setErrors('')
+          toast.success(response.data.message)
           navigate('/login')
         }
         else{
@@ -72,10 +77,10 @@ const Register = () => {
             OR
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
-            <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Register in Using Google</button>
+            <button onClick={handleGoogleClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}><img src={Google} alt='google' style={{'width':'30px', 'height':'30px'}}/> Google</button>
           </div>
           <div className='row' style={{ 'marginTop': '10px' }}>
-            <button onClick={handleGithubClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}>Sign in Using Github</button>
+            <button onClick={handleGithubClick} className='btn' style={{ 'backgroundColor': '#FFC47E' }}><img src={Github} alt='github' style={{'width':'30px', 'height':'30px'}}/> Google</button>
           </div>
         </div>
         
