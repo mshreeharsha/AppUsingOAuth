@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuthContext } from '../../context/authContext'
 
 const BlogDetails = () => {
+
+  const navigate = useNavigate()
 
   const [auth] = useAuthContext()
 
@@ -30,6 +32,11 @@ const BlogDetails = () => {
     fetchBlog()
   },[])
 
+  //Handling the Edit button Click
+  const handleUpdate = ()=>{
+    navigate(`/blogs/update/${blog._id}`)
+  }
+
   return (
     <Layout>
         <h1 style={{ color: '#49108B', textAlign: 'center' }}>{blog.title}</h1>
@@ -37,7 +44,7 @@ const BlogDetails = () => {
           <div style={{ fontSize: '18px', textAlign: 'center' }}>
             <h5>Author: <b>{blog.author.username}</b></h5>
             <div style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>
-                {( blog && blog.author._id===auth.user) ?<><button className='btn btn-info' style={{ marginRight: '10px' }}>Edit</button>
+                {( blog && blog.author._id===auth.user) ?<><button className='btn btn-info' style={{ marginRight: '10px' }} onClick={handleUpdate}>Edit</button>
                 <button className='btn btn-danger'>Delete</button></>:<></>}
             </div>
           </div>

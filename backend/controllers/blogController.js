@@ -61,8 +61,9 @@ const createBlogController = async(req,res)=>{
 const updateBlogController = async(req,res)=>{
     try{
 
-        const existingBlog = await Blog.findById(req.params.bid).select("author")
-        if(existingBlog.author!=req.user._id){
+        const existingBlog = await Blog.findById(req.params.bid).select("author").populate('author')
+        // console.log(existingBlog.author._id.equals(req.user._id))
+        if(!existingBlog.author._id.equals(req.user._id)){
             return res.status(403).send({
                 success:false,
                 message:"User is not Authorized to Edit Someone else's Blog!!"
@@ -124,7 +125,7 @@ const updateBlogController = async(req,res)=>{
 const getAllBlogsController =async(req,res)=>{
     try{
         const allBlogs=await Blog.find({}).sort({createdAt:-1}).select("-photo -contentMain -contentConclusion").populate('author')
-        console.log(allBlogs)
+        // console.log(allBlogs)
         res.status(200).send({
             success:true,
             message:'Fectched all Blogs',
@@ -132,7 +133,7 @@ const getAllBlogsController =async(req,res)=>{
         })
     }
     catch(error){
-        console.log(error.message)
+        // console.log(error.message)
         res.status(400).send({
             success:false,
             message:'Fetching all Blogs Failed!!',

@@ -7,6 +7,7 @@ import BlogDetails from "./pages/blog/BlogDetails";
 import NewBlog from "./pages/blog/NewBlog";
 import AllBlogs from "./pages/blog/AllBlogs";
 import MyBlog from "./pages/blog/MyBlog";
+import UpdateBlog from "./pages/blog/UpdateBlog";
 
 function App() {
   return (
@@ -16,11 +17,12 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='all' element={<AllBlogs/>}/>
-        <Route path='blog/:bid' element={<BlogDetails/>}/>
+        <Route path='/all' element={<AllBlogs/>}/>
+        <Route path='/blog/:bid' element={<BlogDetails/>}/>
         <Route path='/blogs'>
           <Route path='my-blogs' element={<MyBlog/>}/>
           <Route path='create' element={<NewBlog/>}/>
+          <Route path='update/:bid' element={<UpdateBlog/>}/>
         </Route>
       </Routes>
     </div>
