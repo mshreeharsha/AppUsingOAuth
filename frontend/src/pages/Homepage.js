@@ -10,10 +10,12 @@ const Homepage = () => {
     try{
         const response=await axios.get('/auth/google/login-success')
         if(response.data.success){
+          if(localStorage.getItem('auth')===null){
+            toast.success(response.data.message)
+          }
           setAuth({
             user:response.data.user,
           })
-          toast.success(response.data.message)
           localStorage.setItem("auth", JSON.stringify(response.data.user));
         }
         else{

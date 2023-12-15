@@ -9,6 +9,7 @@ import AllBlogs from "./pages/blog/AllBlogs";
 import MyBlog from "./pages/blog/MyBlog";
 import UpdateBlog from "./pages/blog/UpdateBlog";
 import { Toaster } from 'react-hot-toast';
+import AuthRoute from "./routes/AuthRoute";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/all' element={<AllBlogs/>}/>
         <Route path='/blog/:bid' element={<BlogDetails/>}/>
-        <Route path='/blogs'>
+        <Route path='/blogs' element={<AuthRoute/>}>
           <Route path='my-blogs' element={<MyBlog/>}/>
           <Route path='create' element={<NewBlog/>}/>
           <Route path='update/:bid' element={<UpdateBlog/>}/>
