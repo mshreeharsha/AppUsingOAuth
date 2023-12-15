@@ -83,7 +83,7 @@ const BlogDetails = () => {
     {blog && (
         <div className='container' style={{ width: '90%', display: 'flex', flexDirection: 'column', justifyContent: 'center', margin: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <img src={`/blog/get-photo/${blog._id}`} style={{ width: '500px', height: '300px','marginBottom':'20px' }} alt={blog.title} />
+                <img src={`/blog/get-photo/${blog._id}`} style={{ width: '700px', height: '400px','marginBottom':'20px' }} alt={blog.title} />
             </div>
             <div style={{ fontSize: '18px', textAlign: 'left' }}>
               {blog.contentIntro && (

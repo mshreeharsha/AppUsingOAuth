@@ -97,13 +97,13 @@ const UpdateBlog = () => {
                     {photo ? (
                       <div className="text-center">
                         <img src={URL.createObjectURL(photo)} alt={"Blog Pic"}
-                        height={"200px"}
+                        height={"300px"} width={"500px"}
                         className='img img-responsive'/>
                       </div>
                     ):(
                         <div className="text-center">
                             <img src={`/blog/get-photo/${id}`} alt={"Blog Pic"}
-                            height={"200px"}
+                            height={"300px"} width={"500px"}
                             className='img img-responsive'/>
                         </div>
                     )}
