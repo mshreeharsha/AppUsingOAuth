@@ -20,7 +20,7 @@ passport.deserializeUser((id,done)=>{
 passport.use(new GoogleStrategy({
         clientID:process.env.clientIDGoogle,
         clientSecret:process.env.clientSecretGoogle,
-        callbackURL:'/auth/google/redirect'
+        callbackURL:'https://app-using-o-auth-api.vercel.app/auth/google/redirect'
     },(accessToken,refreshToken,profile,done)=>{
         console.log(profile)
 
@@ -48,7 +48,7 @@ passport.use(new GoogleStrategy({
 passport.use(new GithubStrategy({
         clientID:process.env.clientIDGithub,
         clientSecret:process.env.clientSecretGithub,
-        callbackURL:'/auth/github/redirect'
+        callbackURL:'https://app-using-o-auth-api.vercel.app/auth/github/redirect'
     },(accessToken,refreshToken,profile,done)=>{
         console.log(profile)
 
