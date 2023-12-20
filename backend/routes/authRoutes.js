@@ -5,8 +5,8 @@ const User = require('../models/userModel')
 const bcrypt=require('bcryptjs')
 const { requireSignIn } = require('../middleware/authMiddleware')
 
-const backendURL = 'http://localhost:4000'
-const frontendURL = 'http://localhost:3000'
+const backendURL = 'https://app-using-o-auth-api.vercel.app'
+const frontendURL = 'https://app-using-o-auth-frontend.vercel.app'
 
 //Route for sending response after being logged in
 router.get('/google/login-success',(req,res)=>{
