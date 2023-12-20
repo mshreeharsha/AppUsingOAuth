@@ -12,7 +12,7 @@ const databaseSetup=require('./config/databaseSetup')
 
 //cors
 app.use(cors({
-    origin:["http://localhost:3000"],
+    origin:["https://app-using-o-auth-frontend.vercel.app"],
     methods:["GET","POST","PUT","DELETE"],
     credentials:true
 }))
