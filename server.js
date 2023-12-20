@@ -12,7 +12,11 @@ const flash = require('connect-flash');
 const databaseSetup=require('./config/databaseSetup')
 
 //cors
-app.use(cors())
+app.use(cors({
+    origin:["http://localhost:3000"],
+    methods:["GET","POST","PUT","DELETE"],
+    credentials:true
+}))
 
 //Passport Setup
 const passportSetup=require('./config/passportSetup')

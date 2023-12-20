@@ -6,6 +6,7 @@ import {toast} from 'react-hot-toast';
 
 import Google from '../images/google.png'
 import Github from '../images/github.png'
+import { baseURL } from '../baseURL';
 
 const Register = () => {
   const navigate=useNavigate()
@@ -17,13 +18,13 @@ const Register = () => {
     //Register using Google OAuth
     const handleGoogleClick = ()=>{
         //Opens the google auth from backend
-        window.open('http://localhost:4000/auth/google','_self')
+        window.open(`${baseURL}/auth/google`,'_self')
     }
 
     //Register using Github Auth
     const handleGithubClick = ()=>{
       //Opens the github auth from backend
-      window.open('http://localhost:4000/auth/github','_self')
+      window.open(`${baseURL}/auth/github`,'_self')
   }
 
     //Handling Manual Register
