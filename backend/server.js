@@ -1,12 +1,11 @@
 const express=require('express')
 const app=express()
-const keys=require('./config/keys')
 const authRoutes = require('./routes/authRoutes')
 const blogRoutes = require('./routes/blogRoutes')
 const cors=require('cors')
 const cookieSession=require('cookie-session')
 const flash = require('connect-flash');
-
+require('dotenv').config()
 
 //DataBase Setup
 const databaseSetup=require('./config/databaseSetup')
@@ -25,7 +24,7 @@ const passport = require('passport')
 //CookieSession
 app.use(cookieSession({
     maxAge:24*60*60*1000, //1 day
-    keys:[keys.cookieSession.secretKey]
+    keys:[process.env.secretKey]
 }))
 
 //flash
@@ -41,6 +40,6 @@ app.use(express.json())
 app.use('/auth',authRoutes)
 app.use('/blog',blogRoutes)
 
-app.listen(keys.PORT,()=>{
-    console.log(`Server Listining at Port ${keys.PORT}`)
+app.listen(process.env.PORT,()=>{
+    console.log(`Server Listining at Port ${process.env.PORT}`)
 })
