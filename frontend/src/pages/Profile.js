@@ -5,6 +5,8 @@ import axios from 'axios'
 import {toast} from 'react-hot-toast';
 const Profile = () => {
 
+    axios.defaults.withCredentials=true
+
     const [user,setUser]=useState({})
     const [auth]=useAuthContext()
     // console.log(auth)

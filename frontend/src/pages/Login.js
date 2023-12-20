@@ -16,6 +16,8 @@ const Login = () => {
     const [password,setPassword]=useState('')
     const [errors,setErrors]=useState("")
 
+    axios.defaults.withCredentials=true
+
     const handleGoogleClick = ()=>{
         //Opens the google auth from backend
         window.open(`${baseURL}/auth/google`,'_self')
