@@ -13,10 +13,11 @@ const databaseSetup=require('./config/databaseSetup')
 //cors
 app.use(cors({
     origin:"https://app-using-o-auth-frontend.vercel.app",
-    methods:["GET","POST","PUT","DELETE"],
-    credentials:true
+    credentials:true,
+    exposedHeaders: '*'
 }))
 
+app.options('/auth', cors());
 
 //Passport Setup
 const passportSetup=require('./config/passportSetup')
