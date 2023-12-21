@@ -40,7 +40,3 @@ app.use(express.json())
 //Routes
 app.use('/auth',authRoutes)
 app.use('/blog',blogRoutes)
-
-app.listen(process.env.PORT,()=>{
-    console.log(`Server Listining at Port ${process.env.PORT}`)
-})
