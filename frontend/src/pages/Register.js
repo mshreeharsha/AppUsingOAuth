@@ -9,7 +9,6 @@ import Github from '../images/github.png'
 import { baseURL } from '../baseURL';
 
 const Register = () => {
-  axios.defaults.withCredentials=true
   const navigate=useNavigate()
     const [username,setUsername] = useState('')
     const [email,setEmail]=useState('')
@@ -37,7 +36,9 @@ const Register = () => {
         },{
           headers: {
             'Content-Type': 'application/json'
-          }})
+          },
+          withCredentials: true 
+        })
         if(response.data.success){
           setEmail('')
           setUsername('')
