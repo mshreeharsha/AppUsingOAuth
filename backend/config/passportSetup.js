@@ -2,7 +2,6 @@ const passport=require('passport')
 const GoogleStrategy = require('passport-google-oauth20')
 const GithubStrategy = require('passport-github2').Strategy
 const LocalStrategy = require('passport-local').Strategy
-const keys=require('./keys')
 const User=require('../models/userModel')
 const bcrypt = require('bcryptjs')
 
@@ -19,9 +18,9 @@ passport.deserializeUser((id,done)=>{
 })
 
 passport.use(new GoogleStrategy({
-        clientID:keys.google.clientID,
-        clientSecret:keys.google.clientSecret,
-        callbackURL:'/auth/google/redirect'
+        clientID:process.env.clientIDGoogle,
+        clientSecret:process.env.clientSecretGoogle,
+        callbackURL:'https://app-using-o-auth-api.vercel.app/auth/google/redirect'
     },(accessToken,refreshToken,profile,done)=>{
         console.log(profile)
 
@@ -47,9 +46,9 @@ passport.use(new GoogleStrategy({
 ))
 
 passport.use(new GithubStrategy({
-        clientID:keys.github.clientID,
-        clientSecret:keys.github.clientSecret,
-        callbackURL:'/auth/github/redirect'
+        clientID:process.env.clientIDGithub,
+        clientSecret:process.env.clientSecretGithub,
+        callbackURL:'https://app-using-o-auth-api.vercel.app/auth/github/redirect'
     },(accessToken,refreshToken,profile,done)=>{
         console.log(profile)
 
