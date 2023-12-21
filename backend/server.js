@@ -17,6 +17,11 @@ app.use(cors({
     credentials:true
 }))
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 //Passport Setup
 const passportSetup=require('./config/passportSetup')
 const passport = require('passport')
