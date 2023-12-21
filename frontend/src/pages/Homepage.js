@@ -3,12 +3,13 @@ import Layout from '../components/layout/Layout'
 import axios from 'axios'
 import { useAuthContext } from '../context/authContext'
 import {toast} from 'react-hot-toast';
+import { baseURL } from '../baseURL';
 
 const Homepage = () => {
   const [auth,setAuth]=useAuthContext()
   const fetchUser=async()=>{
     try{
-        const response=await axios.get('/auth/google/login-success')
+        const response=await axios.get(`${baseURL}/auth/google/login-success`)
         if(response.data.success){
           if(localStorage.getItem('auth')===null){
             toast.success(response.data.message)

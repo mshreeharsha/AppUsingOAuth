@@ -32,7 +32,7 @@ const Register = () => {
     const handleRegister = async(e)=>{
       try{
         // e.preventDefault()
-        const response=await axios.post('/auth/register',{
+        const response=await axios.post(`${baseURL}/auth/register`,{
           username,email,password
         },{
           headers: {

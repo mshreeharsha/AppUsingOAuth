@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout'
 import { useAuthContext } from '../context/authContext'
 import axios from 'axios'
 import {toast} from 'react-hot-toast';
+import { baseURL } from '../baseURL';
 const Profile = () => {
 
     axios.defaults.withCredentials=true
@@ -13,7 +14,7 @@ const Profile = () => {
 
     const fetchUser= async()=>{
         try{
-            const response = await axios.get('/auth/getUser')
+            const response = await axios.get(`${baseURL}/auth/getUser`)
             if(response.data.success){
                 setUser(response.data.user)
             }
