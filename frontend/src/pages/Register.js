@@ -31,14 +31,12 @@ const Register = () => {
     const handleRegister = async(e)=>{
       try{
         // e.preventDefault()
-        const response=await axios.post(`${baseURL}/auth/register`,{
+        const response=await axios.post('/auth/register',{
           username,email,password
         },{
           headers: {
             'Content-Type': 'application/json'
-          },
-          withCredentials: true 
-        })
+          }})
         if(response.data.success){
           setEmail('')
           setUsername('')

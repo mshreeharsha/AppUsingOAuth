@@ -15,7 +15,7 @@ const Login = () => {
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
     const [errors,setErrors]=useState("")
-    
+
     const handleGoogleClick = ()=>{
         //Opens the google auth from backend
         window.open(`${baseURL}/auth/google`,'_self')
@@ -28,15 +28,12 @@ const Login = () => {
 
     const handleLogin = async()=>{
       try{
-        console.log(`${baseURL}/auth/login`)
-        const response=await axios.post(`${baseURL}/auth/login`,{
+        const response=await axios.post('/auth/login',{
           email,password
         },{
           headers: {
             'Content-Type': 'application/json'
-          },
-          withCredentials: true 
-        })
+          }})
         if(response.data.success){
           setEmail('')
           setPassword('')
@@ -49,7 +46,7 @@ const Login = () => {
           navigate('/')
         }
         else{
-          const res=await axios.get(`${baseURL}/auth/login-failure`)
+          const res=await axios.get('/auth/login-failure')
           setErrors(res.data.message)
         }
       }

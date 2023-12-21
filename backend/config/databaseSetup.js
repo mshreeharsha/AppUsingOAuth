@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-
-mongoose.connect(process.env.mongoURI).then(()=>{
+const keys=require('./keys')
+mongoose.connect(keys.database.mongoURI).then(()=>{
     console.log('Connected to Database!!')
 })
