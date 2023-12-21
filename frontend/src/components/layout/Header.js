@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useAuthContext } from '../../context/authContext'
 import axios from 'axios'
 import {toast} from 'react-hot-toast';
+import { baseURL } from '../../baseURL';
 
 const Header = () => {
     const [auth,setAuth]=useAuthContext()
@@ -14,7 +15,7 @@ const Header = () => {
         })
         localStorage.removeItem('auth')
         toast.success('User Logged Out Successfully')
-        window.open("http://localhost:4000/auth/logout", "_self");
+        window.open(`${baseURL}/auth/logout`, "_self");
     }
 
     const fetchUser= async()=>{

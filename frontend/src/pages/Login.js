@@ -7,6 +7,7 @@ import {toast} from 'react-hot-toast';
 
 import Google from '../images/google.png'
 import Github from '../images/github.png'
+import { baseURL } from '../baseURL'
 
 const Login = () => {
     const [auth,setAuth]=useAuthContext()
@@ -17,12 +18,12 @@ const Login = () => {
 
     const handleGoogleClick = ()=>{
         //Opens the google auth from backend
-        window.open('http://localhost:4000/auth/google','_self')
+        window.open(`${baseURL}/auth/google`,'_self')
     }
 
     const handleGithubClick = ()=>{
         //Opens the github auth from backend
-        window.open('http://localhost:4000/auth/github','_self')
+        window.open(`${baseURL}/auth/github`,'_self')
     }
 
     const handleLogin = async()=>{

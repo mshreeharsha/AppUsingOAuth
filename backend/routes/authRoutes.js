@@ -5,6 +5,9 @@ const User = require('../models/userModel')
 const bcrypt=require('bcryptjs')
 const { requireSignIn } = require('../middleware/authMiddleware')
 
+const backendURL = 'http://localhost:4000'
+const frontendURL = 'http://localhost:3000'
+
 //Route for sending response after being logged in
 router.get('/google/login-success',(req,res)=>{
     if(req.user){
@@ -38,14 +41,14 @@ router.get('/github',passport.authenticate('github',{
 
 //Google OAuth Redirect/Callback Route
 router.get('/google/redirect',passport.authenticate('google',{
-    successRedirect:'http://localhost:3000',
-    failureRedirect:'http://localhost:3000/login'
+    successRedirect:frontendURL,
+    failureRedirect:`${frontendURL}/login`
 }))
 
 //Github OAuth Redirect/Callback Route
 router.get('/github/redirect',passport.authenticate('github',{
-    successRedirect:'http://localhost:3000',
-    failureRedirect:'http://localhost:3000/login'
+    successRedirect:frontendURL,
+    failureRedirect:`${frontendURL}/login`
 }))
 
 //Manual Register Route
@@ -96,7 +99,7 @@ router.post('/register',async(req,res)=>{
 
 //Manual Login Route
 router.post('/login', passport.authenticate('local', {
-    failureRedirect:'http://localhost:4000/auth/login-failure-response',
+    failureRedirect:`${backendURL}/auth/login-failure-response`,
     failureFlash: true
 }),(req,res)=>{
     // console.log('req.isAuthenticated():', req.isAuthenticated());
@@ -129,7 +132,7 @@ router.get('/login-failure', (req, res) => {
 //Logout Route
 router.get('/logout',(req,res)=>{
     req.logout()
-    res.redirect('http://localhost:3000/login')
+    res.redirect(`${frontendURL}/login`)
 })
 
 router.get('/getUser',requireSignIn,(req,res)=>{
