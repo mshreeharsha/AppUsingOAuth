@@ -11,10 +11,7 @@ require('dotenv').config()
 const databaseSetup=require('./config/databaseSetup')
 
 //cors
-app.use(cors({
-    origin:"https://app-using-o-auth-frontend.vercel.app",
-    credentials:true
-}))
+app.use(cors())
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', true);

@@ -1,5 +1,4 @@
 {
-  "proxy": "https://app-using-o-auth-api.vercel.app",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,

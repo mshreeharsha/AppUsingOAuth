@@ -11,9 +11,6 @@ const frontendURL = 'https://app-using-o-auth-frontend.vercel.app'
 //Route for sending response after being logged in
 router.get('/google/login-success',(req,res)=>{
     if(req.user){
-        res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        res.header('Access-Control-Allow-Credentials', true);
         res.status(200).send({
             success:true,
             message:'User SuccessFully Logged in',
@@ -77,9 +74,6 @@ router.post('/register',async(req,res)=>{
     else{
         const existingUser=await User.findOne({email:email})
         if(existingUser){ //Does not allow same email to be registered again
-            res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-            res.header('Access-Control-Allow-Credentials', true);
             return res.status(201).send({
                 success:false,
                 message:"User already exists"
@@ -94,9 +88,6 @@ router.post('/register',async(req,res)=>{
                 email: email,
                 password: hashedPassword,
             }).save()
-            res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-            res.header('Access-Control-Allow-Credentials', true);
             return res.status(200).send({
                 success:true,
                 message:'User Registered!!',
@@ -113,9 +104,6 @@ router.post('/login', passport.authenticate('local', {
 }),(req,res)=>{
     // console.log('req.isAuthenticated():', req.isAuthenticated());
     // console.log('req.user:', req.user);
-    res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Credentials', true);
     res.send({
         success:true,
         message:'Login Successful!!',
@@ -125,9 +113,6 @@ router.post('/login', passport.authenticate('local', {
 
 //Response for Login Failure
 router.get('/login-failure-response',(req,res)=>{
-    res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Credentials', true);
     res.send({
         success:false,
         message:'Login Failed!!'
@@ -138,9 +123,6 @@ router.get('/login-failure-response',(req,res)=>{
 router.get('/login-failure', (req, res) => {
     const errorMessage=req.flash('error')[0]
     //Flash messages are typically consumed after a redirect, or first time use
-    res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Credentials', true);
     res.send({
         success:false,
         message:errorMessage
@@ -154,9 +136,6 @@ router.get('/logout',(req,res)=>{
 })
 
 router.get('/getUser',requireSignIn,(req,res)=>{
-    res.header('Access-Control-Allow-Origin', 'https://app-using-o-auth-frontend.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Credentials', true);
     res.status(200).send({
         success:true,
         message:'User Fetched Successfully!!',
