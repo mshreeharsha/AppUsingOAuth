@@ -10,13 +10,9 @@ const Homepage = () => {
     try{
         const response=await axios.get('/auth/google/login-success')
         if(response.data.success){
-          if(localStorage.getItem('auth')===null){
-            toast.success(response.data.message)
-          }
           setAuth({
             user:response.data.user,
           })
-          localStorage.setItem("auth", JSON.stringify(response.data.user));
         }
         else{
           toast.error(response.data.message)
@@ -37,9 +33,10 @@ const Homepage = () => {
         <div className='container' style={{'margin':'auto','width':'70%','textAlign':'left'}}>
           <h1 style={{'textAlign':'center'}}>Blog App</h1>
           <div style={{'color':'#49108B','fontWeight':'bold','marginTop':'20px','fontSize':'20px'}}>
-            <p>This Blog App is project depicting the Usage of Google's OAuth. OAuth 2.0, an evolution of the original OAuth protocol, is a widely adopted standard for secure and delegated access to resources on the internet. It provides a framework for third-party applications to access user data from resource servers without requiring the disclosure of sensitive credentials, such as usernames and passwords. </p>
+            <p>This Blog App is project depicting the Usage of OAuth along with normal method of sign in and register. OAuth provides a framework for third-party applications to access user data from resource servers without requiring the disclosure of sensitive credentials, such as usernames and passwords. </p>
             <p>
-            Along with Normal way of login and register, the extra option is login using Google. This is single sign off mechanism as the user need not to remember many passwords, but still can be verified and authenticated for the website.
+            This is single sign off mechanism as the user need not to remember many passwords, but still can be verified and authenticated for the website. This is Implemented using pasportjs.</p>
+            <p> <a href="https://www.passportjs.org/" target="_blank">Passportjs</a> has various statergies like GoogleStatergy, GithubStatergy, LocalStatergy (for normal login). And it supports Session Based Authenication instead of Token based.
             </p>
             <p>
               In This website, people can read blogs and only logged in People can upload they own blogs/articles.

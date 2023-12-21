@@ -41,7 +41,6 @@ const Login = () => {
           setAuth({
             user:response.data.user,
           })
-          localStorage.setItem("auth", JSON.stringify(response.data.user));
           toast.success(response.data.message)
           navigate('/')
         }

@@ -6,7 +6,7 @@ const Layout = ({children}) => {
   return (
     <div style={{'backgroundColor':'#F4EEEE','width':'100%'}}>
       <Header/>
-      <main className='container' style={{'width':'70%','margin':'auto','minHeight':"85vH"}}>
+      <main className='container' style={{'width':'70%','margin':'auto','minHeight':"80vH"}}>
         {children}
       </main>
       <Footer/>

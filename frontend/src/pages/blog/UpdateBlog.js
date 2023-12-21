@@ -9,7 +9,7 @@ const UpdateBlog = () => {
 
     const navigate = useNavigate()
     const params = useParams()
-    const [auth]=useAuthContext()
+    const [auth,setAuth]=useAuthContext()
     const [title,setTitle]=useState('')
     const [photo,setPhoto]=useState('')
     const [intro,setIntro]=useState('')
@@ -17,6 +17,28 @@ const UpdateBlog = () => {
     const [error,setError]=useState('')
     const [id,setId]=useState('')
     const [conclusion,setConclusion]=useState('')
+
+    const fetchUser=async()=>{
+        try{
+            const response=await axios.get('/auth/google/login-success')
+            if(response.data.success){
+              setAuth({
+                user:response.data.user,
+              })
+            }
+            else{
+              toast.error(response.data.message)
+            }
+        }
+        catch(error){
+            console.log(error)
+        }
+      }
+    
+      useEffect(()=>{
+          fetchUser()
+          // eslint-disable-next-line
+      },[])
 
     const fetchBlog = async()=>{
         try{

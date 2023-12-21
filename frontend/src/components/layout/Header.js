@@ -13,7 +13,6 @@ const Header = () => {
         setAuth({
             user:null
         })
-        localStorage.removeItem('auth')
         toast.success('User Logged Out Successfully')
         window.open(`${baseURL}/auth/logout`, "_self");
     }
@@ -29,7 +28,7 @@ const Header = () => {
             }
         }
         catch(error){
-            console.log(error)
+            console.log(error.message)
         }
     }
 
